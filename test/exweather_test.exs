@@ -5,7 +5,6 @@ defmodule ExweatherTest do
   @default_city "Louisville"
   @default_state "KY"
   @owm_url "pro.openweathermap.org/data/2.5/forecast/hourly?q="
-  @api_key "127c1bcd8a39782d8f9dece152fff3a0"
 
   test "city, state url generated correctly" do
     assert Request.owm_url("City", "State") ==

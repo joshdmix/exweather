@@ -2,7 +2,6 @@ defmodule ExweatherTest do
   use ExUnit.Case
   alias Exweather.Request
   doctest Exweather
-  @api_key "127c1bcd8a39782d8f9dece152fff3a0"
 
   test "greets the world" do
     assert Request.owm_url("City", "State") == 
