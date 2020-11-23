@@ -37,14 +37,7 @@ defmodule Exweather.CLI do
      System.halt(0)
   end
 
-  def process({city, state}) do
-    url = case state do
-      nil -> Request.owm_url(city)
-      _ -> Request.owm_url(state)
-    end
-
-    res = Request.fetch(url)
-
-    IO.inspect(res)
+  def process(args) do
+    Request.fetch(args)
   end
 end

@@ -3,16 +3,11 @@ defmodule ExweatherTest do
   alias Exweather.Request
   doctest Exweather
 
-  @api_key System.get_env("OWM_API_KEY")
-  @owm_url "pro.openweathermap.org/data/2.5/forecast/hourly?q="
+  @owm_url "api.openweathermap.org/data/2.5/weather?"
 
-  test "city, state url generated correctly" do
-    assert Request.owm_url("City", "State") ==
-             "#{@owm_url}City,State&appid=#{@api_key}"
+  test "url generated correctly" do
+    assert Request.owm_url(11111) ==
+    @owm_url <> "zip=11111&appid=#{System.get_env("OWM_API_KEY")}"
   end
 
-  test "city url generated correctly" do
-    assert Request.owm_url("City") ==
-             "#{@owm_url}City&appid=#{@api_key}"
-  end
 end

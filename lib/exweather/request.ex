@@ -1,13 +1,13 @@
 defmodule Exweather.Request do
   require Logger
 
-  @api_key System.get_env("OWM_API_KEY")
-  @owm_url "pro.openweathermap.org/data/2.5/forecast/hourly?q="
+  @owm_url "api.openweathermap.org/data/2.5/weather?"
   # pro.openweathermap.org/data/2.5/forecast/hourly?q={city name}&appid={API key}
 
   # pro.openweathermap.org/data/2.5/forecast/hourly?q={city name},{state code}&appid={API key}
 
-  def fetch(url) do
+  def fetch(zip_code) do
+    url = owm_url(zip_code)
     Logger.info("Fetching weather data...")
     HTTPoison.get(url)
     |> handle_response
@@ -25,11 +25,7 @@ defmodule Exweather.Request do
     {:error, :jsx.decode(body)}
   end
 
-  def owm_url(city, state) do
-    "#{@owm_url}#{city},#{state}&appid=#{@api_key}"
-  end
-
-  def owm_url(city) do
-    "#{@owm_url}#{city}&appid=#{@api_key}"
+  def owm_url(zip_code) do
+    @owm_url <> "zip=#{zip_code}&appid=#{System.get_env("OWM_API_KEY")}"
   end
 end
