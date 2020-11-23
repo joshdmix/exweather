@@ -1,6 +1,7 @@
 defmodule Exweather.Request do
   require Logger
 
+  @api_key System.get_env("OWM_API_KEY")
   @owm_url "pro.openweathermap.org/data/2.5/forecast/hourly?q="
   # pro.openweathermap.org/data/2.5/forecast/hourly?q={city name}&appid={API key}
 
