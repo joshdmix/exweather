@@ -7,11 +7,12 @@ defmodule Exweather.Request do
   # pro.openweathermap.org/data/2.5/forecast/hourly?q={city name},{state code}&appid={API key}
 
   def fetch(zip_code) do
+    Logger.info("Zip code in fetch #{zip_code}")
     url = owm_url(zip_code)
     Logger.info("Fetching weather data...")
+
     HTTPoison.get(url)
     |> handle_response
-
   end
 
   def handle_response({:ok, %_{status_code: 200, body: body}}) do

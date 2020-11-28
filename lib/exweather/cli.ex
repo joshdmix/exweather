@@ -1,6 +1,5 @@
 defmodule Exweather.CLI do
-  @default_city "Louisville"
-  @default_state "KY"
+  @default_zip 40204
   @moduledoc """
   """
 
@@ -14,27 +13,26 @@ defmodule Exweather.CLI do
     parse = OptionParser.parse(argv, switches: [help: :boolean], aliases: [h: :help])
 
     case parse do
-      {[help: true], _, _} -> :help
+      {[help: true], _, _} ->
+        :help
 
-      {_, [city, state], _} ->
-        {city, state}
-
-      {_, [city], _} ->
-        {city, nil}
+      {_, [zip], _} ->
+        zip
 
       {_, [], _} ->
-        {@default_city, @default_state}
+        @default_zip
 
-      _ -> :help
+      _ ->
+        :help
     end
   end
 
   def process(:help) do
     IO.puts("""
-        usage: exweather { city | #{@default_city}} , { state | #{@default_state}}
-     """)
+       usage: exweather { zip | #{@default_zip}}
+    """)
 
-     System.halt(0)
+    System.halt(0)
   end
 
   def process(args) do
